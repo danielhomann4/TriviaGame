@@ -21,10 +21,11 @@
   <body>
     <div class="contanier">
       <div class="row">
-        <div class="col-md-3 offset-md-4">
+        <div class="col-md-5 offset-md-4">
           <h1>Trivial Trivia Game</h1>
         </div>
       </div>
+      <div id="yep">
       <div class="col-md-6 offset-md-3" id="game"></div>
       <div class="row">
         <div class="col-md-3 offset-md-5" id="button">
@@ -33,86 +34,129 @@
           </button>
         </div>
       </div>
+      </div>
     </div>
     <script
       rel="javascript"
       type="text/javascript"
       href="../assets/javascript/app.js"
     >
-
-
-
-    var questions = [
-    {
-        questions: "1. Who played the character of Harry Potter in the movie?",
-        possiblities: ["Daniel Craig", "Matt Damon", "Chris Evans", "Daniel Red Cliff"],
-        answer: "Daniel Red Cliff"
-    },
-    {
-        questions: "2. What is the capital of the USA?",
-        possiblities: ["Washington D.C.", "Cleveland", "Hollywood", "Vermont"],
-        answer: "Washington D.C."
-    },
-    {
-        questions: "3. Who played the character of Harry Potter in the movie?",
-        possiblities: ["Daniel Craig", "Matt Damon", "Chris Evans", "Daniel Red Cliff"],
-        answer: "Daniel Red Cliff"
-    },
-    {
-        questions: "4. How many conitinents are there in the world?",
-        possiblities: ["5", "4", "6", "7"],
-        answer: "7"
-    },
-    {
-        questions: "5. How many holes are there in a full round of Golf?",
-        possiblities: ["6", "9", "15", "18"],
-        answer: "18"
-    },
-    {
-        questions: "6. What is the regulation height for a basketball hoop?",
-        possiblities: ["8 feet", "9 feet", "10 feet", "12 feet"],
-        answer: "10 feet"
-    },
-    {
-        questions: "7. What year was the first Super Bowl played?",
-        possiblities: ["1965", "1967", "1975", "1977"],
-        answer: "1967"
-    },
-    {
-        questions: "8. What is the highest score possible in 10 pin bowling?",
-        possiblities: ["250", "270", "300", "330"],
-        answer: "300"
-    },
-    {
-        questions: "9. A shuttlecock is used in what sport?",
-        possiblities: ["Baseball", "Badminton", "Cricket", "Lacrose"],
-        answer: "Badminton"
-    },
-    {
-        questions: "10. Which river flows through London?",
-        possiblities: ["The Thames", "The Nile", "Yellow River", "Mississippi River"],
-        answer: "The Thames"
-    }
-];
+      var questions = [
+        {
+          questions:
+            "1. Who played the character of Harry Potter in the movie?",
+          possiblities: [
+            "Daniel Craig",
+            "Matt Damon",
+            "Chris Evans",
+            "Daniel Red Cliff"
+          ],
+          answer: "Daniel Red Cliff"
+        },
+        {
+          questions: "2. What is the capital of the USA?",
+          possiblities: [
+            "Washington D.C.",
+            "Cleveland",
+            "Hollywood",
+            "Vermont"
+          ],
+          answer: "Washington D.C."
+        },
+        {
+          questions:
+            "3. Who played the character of Harry Potter in the movie?",
+          possiblities: [
+            "Daniel Craig",
+            "Matt Damon",
+            "Chris Evans",
+            "Daniel Red Cliff"
+          ],
+          answer: "Daniel Red Cliff"
+        },
+        {
+          questions: "4. How many conitinents are there in the world?",
+          possiblities: ["5", "4", "6", "7"],
+          answer: "7"
+        },
+        {
+          questions: "5. How many holes are there in a full round of Golf?",
+          possiblities: ["6", "9", "15", "18"],
+          answer: "18"
+        },
+        {
+          questions: "6. What is the regulation height for a basketball hoop?",
+          possiblities: ["8 feet", "9 feet", "10 feet", "12 feet"],
+          answer: "10 feet"
+        },
+        {
+          questions: "7. What year was the first Super Bowl played?",
+          possiblities: ["1965", "1967", "1975", "1977"],
+          answer: "1967"
+        },
+        {
+          questions: "8. What is the highest score possible in 10 pin bowling?",
+          possiblities: ["250", "270", "300", "330"],
+          answer: "300"
+        },
+        {
+          questions: "9. A shuttlecock is used in what sport?",
+          possiblities: ["Baseball", "Badminton", "Cricket", "Lacrose"],
+          answer: "Badminton"
+        },
+        {
+          questions: "10. Which river flows through London?",
+          possiblities: [
+            "The Thames",
+            "The Nile",
+            "Yellow River",
+            "Mississippi River"
+          ],
+          answer: "The Thames"
+        }
+      ];
 
     
-$("#start").click(function(){
-    // alert("hello");
-    // for(i = 0; i < questions.length; i++){
-    //     $("#game").append("<h5>" +questions[i].questions + "<h5>");
-    // }
-    // for(a = 0; a < questions.length; a++){
-    //     $("#game").append("<p>" +questions[a].possiblities + "<p>");
-    // } 
-    for (var q = 0; q < questions.length; q++) {
-      $("#game").append("<h4>" + questions[q].questions + "<h4>");
-      for (var p = 0; p < questions[q].possiblities.length; p++) {
-        $("#game").append("<input type='checkbox'" + q +
-          "' value='" + questions[q].possiblities[p] + "''>" + questions[q].possiblities[p]);
-      }
+    let game = {
+        correct: 0,
+        incorrect: 0,
+        counter: 120,
     }
 
-});
+        /////start button    
+      $("#start").click(function() {
+        for (var q = 0; q < questions.length; q++) {
+          $("#game").append("<h4>" + questions[q].questions + "<h4>");
+          for (var p = 0; p < questions[q].possiblities.length; p++) {
+            $("#game").append(
+              "<input type='checkbox'" +
+                q +
+                "' value='" +
+                questions[q].possiblities[p] +
+                "''>" +
+                questions[q].possiblities[p]
+            );
+          }
+        }
+        $("#start").remove();
+        $("#button").append(
+          "<button  class='btn btn-primary' id='submit'>Submit</button>"
+        );
+      });
+
+      //////submit button
+      $("#submit").click(function(){
+          console.log("hey")
+        //   for (a = 0; a < inputs.length; a++){
+        //       console.log(inputs)
+        //     //   if("input:checked" === questions[a].answer){
+        //     //     game.correct++;
+        //     //   } else {
+        //     //     game.incorrect++;
+        //     //   }
+        //   }
+        //   $("#yep").remove();
+      })
     </script>
   </body>
 </html>
