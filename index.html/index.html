@@ -26,14 +26,14 @@
         </div>
       </div>
       <div id="yep">
-      <div class="col-md-6 offset-md-3" id="game"></div>
-      <div class="row">
-        <div class="col-md-3 offset-md-5" id="button">
-          <button type="button" class="btn btn-primary" id="start">
-            Start
-          </button>
+        <div class="col-md-6 offset-md-3" id="game"></div>
+        <div class="row">
+          <div class="col-md-3 offset-md-5" id="button">
+            <button type="button" class="btn btn-primary" id="start">
+              Start
+            </button>
+          </div>
         </div>
-      </div>
       </div>
     </div>
     <script
@@ -116,18 +116,19 @@
         }
       ];
 
-    
-    let game = {
+      let timer;
+
+      let game = {
         correct: 0,
         incorrect: 0,
-        counter: 120,
-    }
+        counter: 120
+      };
 
-        /////start button    
+      /////start button
       $("#start").click(function() {
-        for (var q = 0; q < questions.length; q++) {
+        for (q = 0; q < questions.length; q++) {
           $("#game").append("<h4>" + questions[q].questions + "<h4>");
-          for (var p = 0; p < questions[q].possiblities.length; p++) {
+          for (p = 0; p < questions[q].possiblities.length; p++) {
             $("#game").append(
               "<input type='checkbox'" +
                 q +
@@ -145,18 +146,21 @@
       });
 
       //////submit button
-      $("#submit").click(function(){
-          console.log("hey")
-        //   for (a = 0; a < inputs.length; a++){
-        //       console.log(inputs)
-        //     //   if("input:checked" === questions[a].answer){
-        //     //     game.correct++;
-        //     //   } else {
-        //     //     game.incorrect++;
-        //     //   }
-        //   }
-        //   $("#yep").remove();
-      })
+      $("#submit").click(function() {
+        console.log("hey");
+        for (a = 0; a < inputs.length; a++) {
+          console.log(inputs);
+          if ("input:checked" === questions[a].answer) {
+            game.correct++;
+          } else {
+            game.incorrect++;
+          }
+        }
+        $("#yep").remove();
+        $("#game").html("<h2>Game Over!</h2>");
+        $("#game").append("<h3>Correct Answers: " + game.correct + "</h2>");
+        $("#game").append("<h2>Incorrect Answers: " + game.incorrect + "</h2>");
+      });
     </script>
   </body>
 </html>
