@@ -25,8 +25,9 @@
           <h1>Trivial Trivia Game</h1>
         </div>
       </div>
+      <div class="col-md-6 offset-md-3" id="over"></div>
       <div id="yep">
-            <div class="col-md-6 offset-md-3" id="demo"></div>
+        <div class="col-md-6 offset-md-3" id="demo"></div>
         <div class="col-md-6 offset-md-3" id="game"></div>
         <div class="row">
           <div class="col-md-3 offset-md-5" id="button">
@@ -122,17 +123,25 @@
       let game = {
         correct: 0,
         incorrect: 0,
-        counter: 120
+        counter: 5
       };
-
-      
 
       /////start button
       $("#start").click(function() {
         let myVar = setInterval(myTimer, 1000);
         function myTimer() {
           game.counter--;
-          $("#demo").html("<h2>Time Remaining: " + game.counter + "</h2>")
+          $("#demo").html("<h2>Time Remaining: " + game.counter + "</h2>");
+          if (game.counter === 0) {
+            $("#game").remove();
+            $("#demo").remove();
+            $("#button").remove();
+            $("#over").html("<h2>Game Over!</h2>");
+            $("#over").append("<h3>Correct Answers: " + game.correct + "</h2>");
+            $("#over").append(
+              "<h3>Incorrect Answers: " + game.incorrect + "</h3>"
+            );
+          }
         }
         for (q = 0; q < questions.length; q++) {
           $("#game").append("<h4>" + questions[q].questions + "<h4>");
