@@ -26,6 +26,7 @@
         </div>
       </div>
       <div id="yep">
+            <div class="col-md-6 offset-md-3" id="demo"></div>
         <div class="col-md-6 offset-md-3" id="game"></div>
         <div class="row">
           <div class="col-md-3 offset-md-5" id="button">
@@ -124,8 +125,15 @@
         counter: 120
       };
 
+      
+
       /////start button
       $("#start").click(function() {
+        let myVar = setInterval(myTimer, 1000);
+        function myTimer() {
+          game.counter--;
+          $("#demo").html("<h2>Time Remaining: " + game.counter + "</h2>")
+        }
         for (q = 0; q < questions.length; q++) {
           $("#game").append("<h4>" + questions[q].questions + "<h4>");
           for (p = 0; p < questions[q].possiblities.length; p++) {
@@ -141,12 +149,12 @@
         }
         $("#start").remove();
         $("#button").append(
-          "<button  class='btn btn-primary' id='submit'>Submit</button>"
+          "<button  id='finished' class='btn btn-primary'>Submit</button>"
         );
       });
 
       //////submit button
-      $("#submit").click(function() {
+      $("#finished").click(function() {
         console.log("hey");
         for (a = 0; a < inputs.length; a++) {
           console.log(inputs);
